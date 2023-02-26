@@ -1,0 +1,1561 @@
+using System;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Diagnostics.Metrics;
+using System.Transactions;
+
+
+namespace Finals
+{
+    class Program
+    {
+        static string location, username, password, enter;
+        static int amount, payment, newbal, Total, paymentMthd, beepcard, balance, change, Muntinlupa,
+        Alabang, Bicutan, Paranaque, Laspinas, Bacoor, Pasay, MOA, Pasig, Cubao, Makati, BGC;
+
+        static void Main(String[] args)
+        {
+            Muntinlupa = 15;
+            Alabang = 25;
+            Bicutan = 40;
+            Paranaque = 50;
+            Laspinas = 60;
+            Bacoor = 70;
+            Pasay = 85;
+            MOA = 90;
+            Pasig = 100;
+            Cubao = 105;
+            Makati = 110;
+            BGC = 115;
+
+
+            // MainMenu
+            ShowMainMenu();
+
+            //UserLocation
+            location = GetUserLocation();
+
+
+            //Location method for Muntinlupa
+            if (location == "Muntinlupa")
+            {
+                GetMuntinlupa();
+
+            }
+            //Location method for Alabang
+            if (location == "Alabang")
+            {
+                GetAlabang();
+
+            }
+            //Location method for Bicutan
+            if (location == "Bicutan")
+            {
+                GetBicutan();
+
+            }
+            //Location method for Paranaque
+            if (location == "Paranaque")
+            {
+                GetParanaque();
+
+            }
+            //Location method for Laspinas
+            if (location == "Laspinas")
+            {
+                GetLaspinas();
+
+            }
+            //Location method for Bacoor
+            if (location == "Bacoor")
+            {
+                GetBacoor();
+
+            }
+            //Location method for Pasay
+            if (location == "Pasay")
+            {
+                GetPasay();
+
+            }
+            //Location method for MOA
+            if (location == "MOA")
+            {
+                GetMOA();
+
+            }
+            //Location method for Pasig
+            if (location == "Pasig")
+            {
+                GetPasig();
+
+            }
+            //Location method for Cubao
+            if (location == "Cubao")
+            {
+                GetCubao();
+
+            }
+            //Location method for Makati
+            if (location == "Makati")
+            {
+                GetMakati();
+
+            }
+            //Location method for BGC
+            if (location == "BGC")
+            {
+                GetBGC();
+
+            }
+            else
+            {
+                Console.WriteLine("\nInvalid input, Please input the right keyword. ");
+
+            }
+
+
+        }
+        static void ShowMainMenu()
+        {
+            Console.WriteLine("********************************************************************");
+            Console.WriteLine("*                                                                  *");
+            Console.WriteLine("***************  Welcome to PUPNR Train Station ********************");
+            Console.WriteLine("*                                                                  *");
+            Console.WriteLine("********************************************************************\n");
+            Console.WriteLine(" \nWhere is your Destination, please select your desired location.\n ");
+            Console.WriteLine("Muntinlupa - 15php \tAlabang - 25php \tBicutan - 40php\nParanaque - 50php \tLaspinas - 60php " +
+            "\tBacoor - 70php \nPasay - 85php \t\tMOA - 90php  \t\tPasig - 100php  \nCubao - 105php \t\tMakati - 110php \tBGC - 115php\n  ");
+        }
+        static string GetUserLocation()
+        {
+            string location = Console.ReadLine();
+            return location;
+        }
+        static void ShowPaymentMthd()
+        {
+           Console.WriteLine("\n---Select your Payment Method---");
+           Console.WriteLine("\n Press 1 if Cash Onhand ");
+           Console.WriteLine(" Press 2 if Beep Card\n ");
+        }
+        static int GetpaymentMthd() 
+        {
+            int paymentMthd = Convert.ToInt32(Console.ReadLine());
+            return paymentMthd;
+        }
+        static void GetLoggingAccount()
+
+        {
+            Console.WriteLine("* Enter your Username: *");
+            string username = Console.ReadLine();
+            Console.WriteLine("* Enter your Password: *");
+            string password = Console.ReadLine();
+            Console.WriteLine(" \nWelcome you have Successfully Login! ");
+        }
+        static void GetMuntinlupa()
+        {
+            //Payment Methods
+            ShowPaymentMthd();
+            int paymentMthds = GetpaymentMthd();
+
+            if (paymentMthds == 1)
+            {
+                //The Fare of the location
+                Console.WriteLine(" \nThe fare of Muntinlupa is " + Muntinlupa);
+                Console.WriteLine("Please enter your payment:\n ");
+                payment = Convert.ToInt32(Console.ReadLine());
+
+                change = payment - Muntinlupa;
+                Console.WriteLine(" \nThe change is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                Console.WriteLine(" \n********** Thank you! ******** ");
+
+                //Option to view destination history
+                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                char choice = Console.ReadKey().KeyChar;
+
+                if (choice == 'Y' || choice == 'y')
+                {
+                    Console.WriteLine("\n**************************************");
+                    Console.WriteLine(" Destination & Transcation History ");
+                    Console.WriteLine("\nDestination: " + location);
+                    Console.WriteLine("Amount Paid: " + payment);
+                    Console.WriteLine("Location Fare: " + Muntinlupa);
+                    Console.WriteLine("Change: " + change);
+                    Console.WriteLine("**************************************\n");
+                }
+
+            }
+            else if (paymentMthds == 2)
+            {
+
+                Console.WriteLine(" \nPress 1 to login to your existing account ");
+                Console.WriteLine("Press 2 to exit\n ");
+                beepcard = Convert.ToInt32(Console.ReadLine());
+
+                if (beepcard == 1)
+                {
+                    //Logging account
+                    GetLoggingAccount();
+
+
+                    while (true)
+                    {
+                        //Checking Balance account
+                        Console.WriteLine(" \nPress 1 to check your current Balance ");
+                        Console.WriteLine("Press 2 to recharge your Balance\n ");
+
+                        balance = Convert.ToInt32(Console.ReadLine());
+                        amount = 50;
+
+
+                        if (balance == 1)
+                        {
+
+                            Console.WriteLine("\n*** Your account balance is " + amount + " *");
+                        }
+                        else if (balance == 2)
+                        {
+                            //Recharge the balance account
+                            Console.WriteLine("\nHow much do you want to recharge? ");
+                            newbal = Convert.ToInt32(Console.ReadLine());
+
+                            Total = amount + newbal;
+                            Console.WriteLine("\n*** The total amount is " + Total + " *");
+
+                            Console.WriteLine(" \nThe fare of Muntinlupa is " + Muntinlupa);
+                            Console.WriteLine("Type Enter to proceed paying...\n ");
+                            enter = Console.ReadLine();
+
+                            if (enter == "Enter")
+                            {
+                                change = Total - Muntinlupa;
+                                Console.WriteLine(" \nYour account balance is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                                Console.WriteLine(" \n********** Thank you! ******** ");
+
+
+                                //Option to view destination history
+                                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                                char choice = Console.ReadKey().KeyChar;
+
+                                if (choice == 'Y' || choice == 'y')
+                                {
+                                    Console.WriteLine("\n**************************************");
+                                    Console.WriteLine(" Destination & Transcation History ");
+                                    Console.WriteLine("\nDestination: " + location);
+                                    Console.WriteLine("Amount Paid: " + Total);
+                                    Console.WriteLine("Location Fare: " + Muntinlupa);
+                                    Console.WriteLine("Account Balance: " + change);
+                                    Console.WriteLine("**************************************\n");
+                                    Console.WriteLine("Thank you for riding with PUPNR Train Station.");
+
+
+                                }
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("\nInvalid input, Please input the right keyword. ");
+
+                            }
+
+                        }
+
+                    }
+                }
+                if (beepcard == 2)
+                    Console.WriteLine("*** Thank you for your Explore! ***");
+                return;
+
+            }
+        }
+        static void GetAlabang()
+        {
+            //Payment Methods
+            ShowPaymentMthd();
+            int paymentMthds = GetpaymentMthd();
+
+            if (paymentMthds == 1)
+            {
+                //The Fare of the location
+                Console.WriteLine(" \nThe fare of Alabang is " + Alabang);
+                Console.WriteLine("Please enter your payment:\n ");
+                payment = Convert.ToInt32(Console.ReadLine());
+
+                change = payment - Alabang;
+                Console.WriteLine(" \nThe change is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                Console.WriteLine(" \n********** Thank you! ******** ");
+
+                //Option to view destination history
+                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                char choice = Console.ReadKey().KeyChar;
+
+                if (choice == 'Y' || choice == 'y')
+                {
+                    Console.WriteLine("\n**************************************");
+                    Console.WriteLine(" Destination & Transcation History ");
+                    Console.WriteLine("\nDestination: " + location);
+                    Console.WriteLine("Amount Paid: " + payment);
+                    Console.WriteLine("Location Fare: " + Alabang);
+                    Console.WriteLine("Change: " + change);
+                    Console.WriteLine("**************************************\n");
+                }
+
+            }
+            else if (paymentMthds == 2)
+            {
+
+                Console.WriteLine(" \nPress 1 to login to your existing account ");
+                Console.WriteLine("Press 2 to exit\n ");
+                beepcard = Convert.ToInt32(Console.ReadLine());
+
+                if (beepcard == 1)
+                {
+                    //Logging account
+                    GetLoggingAccount();
+
+
+                    while (true)
+                    {
+                        //Checking Balance account
+                        Console.WriteLine(" \nPress 1 to check your current Balance ");
+                        Console.WriteLine("Press 2 to recharge your Balance\n ");
+
+                        balance = Convert.ToInt32(Console.ReadLine());
+                        amount = 50;
+
+
+                        if (balance == 1)
+                        {
+
+                            Console.WriteLine("\n*** Your account balance is " + amount + " *");
+                        }
+                        else if (balance == 2)
+                        {
+                            //Recharge the balance account
+                            Console.WriteLine("\nHow much do you want to recharge? ");
+                            newbal = Convert.ToInt32(Console.ReadLine());
+
+                            Total = amount + newbal;
+                            Console.WriteLine("\n*** The total amount is " + Total + " *");
+
+                            Console.WriteLine(" \nThe fare of Alabang is " + Alabang);
+                            Console.WriteLine("Type Enter to proceed paying...\n ");
+                            enter = Console.ReadLine();
+
+                            if (enter == "Enter")
+                            {
+                                change = Total - Alabang;
+                                Console.WriteLine(" \nYour account balance is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                                Console.WriteLine(" \n********** Thank you! ******** ");
+
+
+                                //Option to view destination history
+                                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                                char choice = Console.ReadKey().KeyChar;
+
+                                if (choice == 'Y' || choice == 'y')
+                                {
+                                    Console.WriteLine("\n**************************************");
+                                    Console.WriteLine(" Destination & Transcation History ");
+                                    Console.WriteLine("\nDestination: " + location);
+                                    Console.WriteLine("Amount Paid: " + Total);
+                                    Console.WriteLine("Location Fare: " + Alabang);
+                                    Console.WriteLine("Account Balance: " + change);
+                                    Console.WriteLine("**************************************\n");
+                                    Console.WriteLine("Thank you for riding with PUPNR Train Station.");
+
+
+                                }
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("\nInvalid input, Please input the right keyword. ");
+
+                            }
+
+                        }
+
+                    }
+                }
+                if (beepcard == 2)
+                    Console.WriteLine("*** Thank you for your Explore! ***");
+                return;
+
+            }
+        }
+        static void GetBicutan()
+        {
+             //Payment Methods
+                ShowPaymentMthd();
+                int paymentMthds = GetpaymentMthd();
+
+                if (paymentMthds == 1)
+                {
+                    //The Fare of the location
+                    Console.WriteLine(" \nThe fare of Bicutan is " + Bicutan);
+                    Console.WriteLine("Please enter your payment:\n ");
+                    payment = Convert.ToInt32(Console.ReadLine());
+
+                    change = payment - Bicutan;
+                    Console.WriteLine(" \nThe change is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                    Console.WriteLine(" \n********** Thank you! ******** ");
+
+                    //Option to view destination history
+                    Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                    char choice = Console.ReadKey().KeyChar;
+
+                    if (choice == 'Y' || choice == 'y')
+                    {
+                        Console.WriteLine("\n**************************************");
+                        Console.WriteLine(" Destination & Transcation History ");
+                        Console.WriteLine("\nDestination: " + location);
+                        Console.WriteLine("Amount Paid: " + payment);
+                        Console.WriteLine("Location Fare: " + Bicutan);
+                        Console.WriteLine("Change: " + change);
+                        Console.WriteLine("**************************************\n");
+                    }
+
+                }
+                else if (paymentMthds == 2)
+                {
+
+                    Console.WriteLine(" \nPress 1 to login to your existing account ");
+                    Console.WriteLine("Press 2 to exit\n ");
+                    beepcard = Convert.ToInt32(Console.ReadLine());
+
+                    if (beepcard == 1)
+                    {
+                        //Logging account
+                        GetLoggingAccount();
+
+
+                        while (true)
+                        {
+                            //Checking Balance account
+                            Console.WriteLine(" \nPress 1 to check your current Balance ");
+                            Console.WriteLine("Press 2 to recharge your Balance\n ");
+
+                            balance = Convert.ToInt32(Console.ReadLine());
+                            amount = 50;
+
+
+                            if (balance == 1)
+                            {
+
+                                Console.WriteLine("\n*** Your account balance is " + amount + " *");
+                            }
+                            else if (balance == 2)
+                            {
+                                //Recharge the balance account
+                                Console.WriteLine("\nHow much do you want to recharge? ");
+                                newbal = Convert.ToInt32(Console.ReadLine());
+
+                                Total = amount + newbal;
+                                Console.WriteLine("\n*** The total amount is " + Total + " *");
+
+                                Console.WriteLine(" \nThe fare of Bicutan is " + Bicutan);
+                                Console.WriteLine("Type Enter to proceed paying...\n ");
+                                enter = Console.ReadLine();
+
+                                if (enter == "Enter")
+                                {
+                                    change = Total - Bicutan;
+                                    Console.WriteLine(" \nYour account balance is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                                    Console.WriteLine(" \n********** Thank you! ******** ");
+
+
+                                    //Option to view destination history
+                                    Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                                    char choice = Console.ReadKey().KeyChar;
+
+                                    if (choice == 'Y' || choice == 'y')
+                                    {
+                                        Console.WriteLine("\n**************************************");
+                                        Console.WriteLine(" Destination & Transcation History ");
+                                        Console.WriteLine("\nDestination: " + location);
+                                        Console.WriteLine("Amount Paid: " + Total);
+                                        Console.WriteLine("Location Fare: " + Bicutan);
+                                        Console.WriteLine("Account Balance: " + change);
+                                        Console.WriteLine("**************************************\n");
+                                        Console.WriteLine("Thank you for riding with PUPNR Train Station.");
+
+
+                                    }
+                                    break;
+                                }
+
+                                else
+                                {
+                                    Console.WriteLine("\nInvalid input, Please input the right keyword. ");
+
+                                }
+
+                            }
+
+                        }
+                    }
+                    if (beepcard == 2)
+                        Console.WriteLine("*** Thank you for your Explore! ***");
+                    return;
+
+                }
+        }
+        static void GetParanaque()
+        {
+            //Payment Methods
+            ShowPaymentMthd();
+            int paymentMthds = GetpaymentMthd();
+
+            if (paymentMthds == 1)
+            {
+                //The Fare of the location
+                Console.WriteLine(" \nThe fare of Paranaque is " + Paranaque);
+                Console.WriteLine("Please enter your payment:\n ");
+                payment = Convert.ToInt32(Console.ReadLine());
+
+                change = payment - Paranaque;
+                Console.WriteLine(" \nThe change is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                Console.WriteLine(" \n********** Thank you! ******** ");
+
+                //Option to view destination history
+                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                char choice = Console.ReadKey().KeyChar;
+
+                if (choice == 'Y' || choice == 'y')
+                {
+                    Console.WriteLine("\n**************************************");
+                    Console.WriteLine(" Destination & Transcation History ");
+                    Console.WriteLine("\nDestination: " + location);
+                    Console.WriteLine("Amount Paid: " + payment);
+                    Console.WriteLine("Location Fare: " + Paranaque);
+                    Console.WriteLine("Change: " + change);
+                    Console.WriteLine("**************************************\n");
+                }
+
+            }
+            else if (paymentMthds == 2)
+            {
+
+                Console.WriteLine(" \nPress 1 to login to your existing account ");
+                Console.WriteLine("Press 2 to exit\n ");
+                beepcard = Convert.ToInt32(Console.ReadLine());
+
+                if (beepcard == 1)
+                {
+                    //Logging account
+                    GetLoggingAccount();
+
+
+                    while (true)
+                    {
+                        //Checking Balance account
+                        Console.WriteLine(" \nPress 1 to check your current Balance ");
+                        Console.WriteLine("Press 2 to recharge your Balance\n ");
+
+                        balance = Convert.ToInt32(Console.ReadLine());
+                        amount = 50;
+
+
+                        if (balance == 1)
+                        {
+
+                            Console.WriteLine("\n*** Your account balance is " + amount + " *");
+                        }
+                        else if (balance == 2)
+                        {
+                            //Recharge the balance account
+                            Console.WriteLine("\nHow much do you want to recharge? ");
+                            newbal = Convert.ToInt32(Console.ReadLine());
+
+                            Total = amount + newbal;
+                            Console.WriteLine("\n*** The total amount is " + Total + " *");
+
+                            Console.WriteLine(" \nThe fare of Paranaque is " + Paranaque);
+                            Console.WriteLine("Type Enter to proceed paying...\n ");
+                            enter = Console.ReadLine();
+
+                            if (enter == "Enter")
+                            {
+                                change = Total - Paranaque;
+                                Console.WriteLine(" \nYour account balance is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                                Console.WriteLine(" \n********** Thank you! ******** ");
+
+
+                                //Option to view destination history
+                                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                                char choice = Console.ReadKey().KeyChar;
+
+                                if (choice == 'Y' || choice == 'y')
+                                {
+                                    Console.WriteLine("\n**************************************");
+                                    Console.WriteLine(" Destination & Transcation History ");
+                                    Console.WriteLine("\nDestination: " + location);
+                                    Console.WriteLine("Amount Paid: " + Total);
+                                    Console.WriteLine("Location Fare: " + Paranaque);
+                                    Console.WriteLine("Account Balance: " + change);
+                                    Console.WriteLine("**************************************\n");
+                                    Console.WriteLine("Thank you for riding with PUPNR Train Station.");
+
+
+                                }
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("\nInvalid input, Please input the right keyword. ");
+
+                            }
+
+                        }
+
+                    }
+                }
+                if (beepcard == 2)
+                    Console.WriteLine("*** Thank you for your Explore! ***");
+                return;
+
+            }
+        }
+        static void GetLaspinas()
+        {
+            //Payment Methods
+            ShowPaymentMthd();
+            int paymentMthds = GetpaymentMthd();
+
+            if (paymentMthds == 1)
+            {
+                //The Fare of the location
+                Console.WriteLine(" \nThe fare of Laspinas is " + Laspinas);
+                Console.WriteLine("Please enter your payment:\n ");
+                payment = Convert.ToInt32(Console.ReadLine());
+
+                change = payment - Laspinas;
+                Console.WriteLine(" \nThe change is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                Console.WriteLine(" \n********** Thank you! ******** ");
+
+                //Option to view destination history
+                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                char choice = Console.ReadKey().KeyChar;
+
+                if (choice == 'Y' || choice == 'y')
+                {
+                    Console.WriteLine("\n**************************************");
+                    Console.WriteLine(" Destination & Transcation History ");
+                    Console.WriteLine("\nDestination: " + location);
+                    Console.WriteLine("Amount Paid: " + payment);
+                    Console.WriteLine("Location Fare: " + Laspinas);
+                    Console.WriteLine("Change: " + change);
+                    Console.WriteLine("**************************************\n");
+                }
+
+            }
+            else if (paymentMthds == 2)
+            {
+
+                Console.WriteLine(" \nPress 1 to login to your existing account ");
+                Console.WriteLine("Press 2 to exit\n ");
+                beepcard = Convert.ToInt32(Console.ReadLine());
+
+                if (beepcard == 1)
+                {
+                    //Logging account
+                    GetLoggingAccount();
+
+
+                    while (true)
+                    {
+                        //Checking Balance account
+                        Console.WriteLine(" \nPress 1 to check your current Balance ");
+                        Console.WriteLine("Press 2 to recharge your Balance\n ");
+
+                        balance = Convert.ToInt32(Console.ReadLine());
+                        amount = 50;
+
+
+                        if (balance == 1)
+                        {
+
+                            Console.WriteLine("\n*** Your account balance is " + amount + " *");
+                        }
+                        else if (balance == 2)
+                        {
+                            //Recharge the balance account
+                            Console.WriteLine("\nHow much do you want to recharge? ");
+                            newbal = Convert.ToInt32(Console.ReadLine());
+
+                            Total = amount + newbal;
+                            Console.WriteLine("\n*** The total amount is " + Total + " *");
+
+                            Console.WriteLine(" \nThe fare of Laspinas is " + Laspinas);
+                            Console.WriteLine("Type Enter to proceed paying...\n ");
+                            enter = Console.ReadLine();
+
+                            if (enter == "Enter")
+                            {
+                                change = Total - Laspinas;
+                                Console.WriteLine(" \nYour account balance is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                                Console.WriteLine(" \n********** Thank you! ******** ");
+
+
+                                //Option to view destination history
+                                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                                char choice = Console.ReadKey().KeyChar;
+
+                                if (choice == 'Y' || choice == 'y')
+                                {
+                                    Console.WriteLine("\n**************************************");
+                                    Console.WriteLine(" Destination & Transcation History ");
+                                    Console.WriteLine("\nDestination: " + location);
+                                    Console.WriteLine("Amount Paid: " + Total);
+                                    Console.WriteLine("Location Fare: " + Laspinas);
+                                    Console.WriteLine("Account Balance: " + change);
+                                    Console.WriteLine("**************************************\n");
+                                    Console.WriteLine("Thank you for riding with PUPNR Train Station.");
+
+
+                                }
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("\nInvalid input, Please input the right keyword. ");
+
+                            }
+
+                        }
+
+                    }
+                }
+                if (beepcard == 2)
+                    Console.WriteLine("*** Thank you for your Explore! ***");
+                return;
+
+            }
+        }
+        static void GetBacoor()
+        {
+            //Payment Methods
+            ShowPaymentMthd();
+            int paymentMthds = GetpaymentMthd();
+
+            if (paymentMthds == 1)
+            {
+                //The Fare of the location
+                Console.WriteLine(" \nThe fare of Bacoor is " + Bacoor);
+                Console.WriteLine("Please enter your payment:\n ");
+                payment = Convert.ToInt32(Console.ReadLine());
+
+                change = payment - Bacoor;
+                Console.WriteLine(" \nThe change is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                Console.WriteLine(" \n********** Thank you! ******** ");
+
+                //Option to view destination history
+                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                char choice = Console.ReadKey().KeyChar;
+
+                if (choice == 'Y' || choice == 'y')
+                {
+                    Console.WriteLine("\n**************************************");
+                    Console.WriteLine(" Destination & Transcation History ");
+                    Console.WriteLine("\nDestination: " + location);
+                    Console.WriteLine("Amount Paid: " + payment);
+                    Console.WriteLine("Location Fare: " + Bacoor);
+                    Console.WriteLine("Change: " + change);
+                    Console.WriteLine("**************************************\n");
+                }
+
+            }
+            else if (paymentMthds == 2)
+            {
+
+                Console.WriteLine(" \nPress 1 to login to your existing account ");
+                Console.WriteLine("Press 2 to exit\n ");
+                beepcard = Convert.ToInt32(Console.ReadLine());
+
+                if (beepcard == 1)
+                {
+                    //Logging account
+                    GetLoggingAccount();
+
+
+                    while (true)
+                    {
+                        //Checking Balance account
+                        Console.WriteLine(" \nPress 1 to check your current Balance ");
+                        Console.WriteLine("Press 2 to recharge your Balance\n ");
+
+                        balance = Convert.ToInt32(Console.ReadLine());
+                        amount = 50;
+
+
+                        if (balance == 1)
+                        {
+
+                            Console.WriteLine("\n*** Your account balance is " + amount + " *");
+                        }
+                        else if (balance == 2)
+                        {
+                            //Recharge the balance account
+                            Console.WriteLine("\nHow much do you want to recharge? ");
+                            newbal = Convert.ToInt32(Console.ReadLine());
+
+                            Total = amount + newbal;
+                            Console.WriteLine("\n*** The total amount is " + Total + " *");
+
+                            Console.WriteLine(" \nThe fare of Bacoor is " + Bacoor);
+                            Console.WriteLine("Type Enter to proceed paying...\n ");
+                            enter = Console.ReadLine();
+
+                            if (enter == "Enter")
+                            {
+                                change = Total - Bacoor;
+                                Console.WriteLine(" \nYour account balance is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                                Console.WriteLine(" \n********** Thank you! ******** ");
+
+
+                                //Option to view destination history
+                                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                                char choice = Console.ReadKey().KeyChar;
+
+                                if (choice == 'Y' || choice == 'y')
+                                {
+                                    Console.WriteLine("\n**************************************");
+                                    Console.WriteLine(" Destination & Transcation History ");
+                                    Console.WriteLine("\nDestination: " + location);
+                                    Console.WriteLine("Amount Paid: " + Total);
+                                    Console.WriteLine("Location Fare: " + Bacoor);
+                                    Console.WriteLine("Account Balance: " + change);
+                                    Console.WriteLine("**************************************\n");
+                                    Console.WriteLine("Thank you for riding with PUPNR Train Station.");
+
+
+                                }
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("\nInvalid input, Please input the right keyword. ");
+
+                            }
+
+                        }
+
+                    }
+                }
+                if (beepcard == 2)
+                    Console.WriteLine("*** Thank you for your Explore! ***");
+                return;
+
+            }
+        }
+        static void GetPasay()
+        {
+            //Payment Methods
+            ShowPaymentMthd();
+            int paymentMthds = GetpaymentMthd();
+
+            if (paymentMthds == 1)
+            {
+                //The Fare of the location
+                Console.WriteLine(" \nThe fare of Pasay is " + Pasay);
+                Console.WriteLine("Please enter your payment:\n ");
+                payment = Convert.ToInt32(Console.ReadLine());
+
+                change = payment - Pasay;
+                Console.WriteLine(" \nThe change is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                Console.WriteLine(" \n********** Thank you! ******** ");
+
+                //Option to view destination history
+                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                char choice = Console.ReadKey().KeyChar;
+
+                if (choice == 'Y' || choice == 'y')
+                {
+                    Console.WriteLine("\n**************************************");
+                    Console.WriteLine(" Destination & Transcation History ");
+                    Console.WriteLine("\nDestination: " + location);
+                    Console.WriteLine("Amount Paid: " + payment);
+                    Console.WriteLine("Location Fare: " + Pasay);
+                    Console.WriteLine("Change: " + change);
+                    Console.WriteLine("**************************************\n");
+                }
+
+            }
+            else if (paymentMthds == 2)
+            {
+
+                Console.WriteLine(" \nPress 1 to login to your existing account ");
+                Console.WriteLine("Press 2 to exit\n ");
+                beepcard = Convert.ToInt32(Console.ReadLine());
+
+                if (beepcard == 1)
+                {
+                    //Logging account
+                    GetLoggingAccount();
+
+
+                    while (true)
+                    {
+                        //Checking Balance account
+                        Console.WriteLine(" \nPress 1 to check your current Balance ");
+                        Console.WriteLine("Press 2 to recharge your Balance\n ");
+
+                        balance = Convert.ToInt32(Console.ReadLine());
+                        amount = 50;
+
+
+                        if (balance == 1)
+                        {
+
+                            Console.WriteLine("\n*** Your account balance is " + amount + " *");
+                        }
+                        else if (balance == 2)
+                        {
+                            //Recharge the balance account
+                            Console.WriteLine("\nHow much do you want to recharge? ");
+                            newbal = Convert.ToInt32(Console.ReadLine());
+
+                            Total = amount + newbal;
+                            Console.WriteLine("\n*** The total amount is " + Total + " *");
+
+                            Console.WriteLine(" \nThe fare of Pasay is " + Pasay);
+                            Console.WriteLine("Type Enter to proceed paying...\n ");
+                            enter = Console.ReadLine();
+
+                            if (enter == "Enter")
+                            {
+                                change = Total - Pasay;
+                                Console.WriteLine(" \nYour account balance is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                                Console.WriteLine(" \n********** Thank you! ******** ");
+
+
+                                //Option to view destination history
+                                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                                char choice = Console.ReadKey().KeyChar;
+
+                                if (choice == 'Y' || choice == 'y')
+                                {
+                                    Console.WriteLine("\n**************************************");
+                                    Console.WriteLine(" Destination & Transcation History ");
+                                    Console.WriteLine("\nDestination: " + location);
+                                    Console.WriteLine("Amount Paid: " + Total);
+                                    Console.WriteLine("Location Fare: " + Pasay);
+                                    Console.WriteLine("Account Balance: " + change);
+                                    Console.WriteLine("**************************************\n");
+                                    Console.WriteLine("Thank you for riding with PUPNR Train Station.");
+
+
+                                }
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("\nInvalid input, Please input the right keyword. ");
+
+                            }
+
+                        }
+
+                    }
+                }
+                if (beepcard == 2)
+                    Console.WriteLine("*** Thank you for your Explore! ***");
+                return;
+
+            }
+        }
+        static void GetMOA()
+        {
+            //Payment Methods
+            ShowPaymentMthd();
+            int paymentMthds = GetpaymentMthd();
+
+            if (paymentMthds == 1)
+            {
+                //The Fare of the location
+                Console.WriteLine(" \nThe fare of MOA is " + MOA);
+                Console.WriteLine("Please enter your payment:\n ");
+                payment = Convert.ToInt32(Console.ReadLine());
+
+                change = payment - MOA;
+                Console.WriteLine(" \nThe change is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                Console.WriteLine(" \n********** Thank you! ******** ");
+
+                //Option to view destination history
+                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                char choice = Console.ReadKey().KeyChar;
+
+                if (choice == 'Y' || choice == 'y')
+                {
+                    Console.WriteLine("\n**************************************");
+                    Console.WriteLine(" Destination & Transcation History ");
+                    Console.WriteLine("\nDestination: " + location);
+                    Console.WriteLine("Amount Paid: " + payment);
+                    Console.WriteLine("Location Fare: " + MOA);
+                    Console.WriteLine("Change: " + change);
+                    Console.WriteLine("**************************************\n");
+                }
+
+            }
+            else if (paymentMthds == 2)
+            {
+
+                Console.WriteLine(" \nPress 1 to login to your existing account ");
+                Console.WriteLine("Press 2 to exit\n ");
+                beepcard = Convert.ToInt32(Console.ReadLine());
+
+                if (beepcard == 1)
+                {
+                    //Logging account
+                    GetLoggingAccount();
+
+
+                    while (true)
+                    {
+                        //Checking Balance account
+                        Console.WriteLine(" \nPress 1 to check your current Balance ");
+                        Console.WriteLine("Press 2 to recharge your Balance\n ");
+
+                        balance = Convert.ToInt32(Console.ReadLine());
+                        amount = 50;
+
+
+                        if (balance == 1)
+                        {
+
+                            Console.WriteLine("\n*** Your account balance is " + amount + " *");
+                        }
+                        else if (balance == 2)
+                        {
+                            //Recharge the balance account
+                            Console.WriteLine("\nHow much do you want to recharge? ");
+                            newbal = Convert.ToInt32(Console.ReadLine());
+
+                            Total = amount + newbal;
+                            Console.WriteLine("\n*** The total amount is " + Total + " *");
+
+                            Console.WriteLine(" \nThe fare of MOA is " + MOA);
+                            Console.WriteLine("Type Enter to proceed paying...\n ");
+                            enter = Console.ReadLine();
+
+                            if (enter == "Enter")
+                            {
+                                change = Total - MOA;
+                                Console.WriteLine(" \nYour account balance is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                                Console.WriteLine(" \n********** Thank you! ******** ");
+
+
+                                //Option to view destination history
+                                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                                char choice = Console.ReadKey().KeyChar;
+
+                                if (choice == 'Y' || choice == 'y')
+                                {
+                                    Console.WriteLine("\n**************************************");
+                                    Console.WriteLine(" Destination & Transcation History ");
+                                    Console.WriteLine("\nDestination: " + location);
+                                    Console.WriteLine("Amount Paid: " + Total);
+                                    Console.WriteLine("Location Fare: " + MOA);
+                                    Console.WriteLine("Account Balance: " + change);
+                                    Console.WriteLine("**************************************\n");
+                                    Console.WriteLine("Thank you for riding with PUPNR Train Station.");
+
+
+                                }
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("\nInvalid input, Please input the right keyword. ");
+
+                            }
+
+                        }
+
+                    }
+                }
+                if (beepcard == 2)
+                    Console.WriteLine("*** Thank you for your Explore! ***");
+                return;
+
+            }
+        }
+        static void GetPasig()
+        {
+            //Payment Methods
+            ShowPaymentMthd();
+            int paymentMthds = GetpaymentMthd();
+
+            if (paymentMthds == 1)
+            {
+                //The Fare of the location
+                Console.WriteLine(" \nThe fare of Pasig is " + Pasig);
+                Console.WriteLine("Please enter your payment:\n ");
+                payment = Convert.ToInt32(Console.ReadLine());
+
+                change = payment - Pasig;
+                Console.WriteLine(" \nThe change is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                Console.WriteLine(" \n********** Thank you! ******** ");
+
+                //Option to view destination history
+                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                char choice = Console.ReadKey().KeyChar;
+
+                if (choice == 'Y' || choice == 'y')
+                {
+                    Console.WriteLine("\n**************************************");
+                    Console.WriteLine(" Destination & Transcation History ");
+                    Console.WriteLine("\nDestination: " + location);
+                    Console.WriteLine("Amount Paid: " + payment);
+                    Console.WriteLine("Location Fare: " + Pasig);
+                    Console.WriteLine("Change: " + change);
+                    Console.WriteLine("**************************************\n");
+                }
+
+            }
+            else if (paymentMthds == 2)
+            {
+
+                Console.WriteLine(" \nPress 1 to login to your existing account ");
+                Console.WriteLine("Press 2 to exit\n ");
+                beepcard = Convert.ToInt32(Console.ReadLine());
+
+                if (beepcard == 1)
+                {
+                    //Logging account
+                    GetLoggingAccount();
+
+
+                    while (true)
+                    {
+                        //Checking Balance account
+                        Console.WriteLine(" \nPress 1 to check your current Balance ");
+                        Console.WriteLine("Press 2 to recharge your Balance\n ");
+
+                        balance = Convert.ToInt32(Console.ReadLine());
+                        amount = 50;
+
+
+                        if (balance == 1)
+                        {
+
+                            Console.WriteLine("\n*** Your account balance is " + amount + " *");
+                        }
+                        else if (balance == 2)
+                        {
+                            //Recharge the balance account
+                            Console.WriteLine("\nHow much do you want to recharge? ");
+                            newbal = Convert.ToInt32(Console.ReadLine());
+
+                            Total = amount + newbal;
+                            Console.WriteLine("\n*** The total amount is " + Total + " *");
+
+                            Console.WriteLine(" \nThe fare of Pasig is " + Pasig);
+                            Console.WriteLine("Type Enter to proceed paying...\n ");
+                            enter = Console.ReadLine();
+
+                            if (enter == "Enter")
+                            {
+                                change = Total - Pasig;
+                                Console.WriteLine(" \nYour account balance is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                                Console.WriteLine(" \n********** Thank you! ******** ");
+
+
+                                //Option to view destination history
+                                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                                char choice = Console.ReadKey().KeyChar;
+
+                                if (choice == 'Y' || choice == 'y')
+                                {
+                                    Console.WriteLine("\n**************************************");
+                                    Console.WriteLine(" Destination & Transcation History ");
+                                    Console.WriteLine("\nDestination: " + location);
+                                    Console.WriteLine("Amount Paid: " + Total);
+                                    Console.WriteLine("Location Fare: " + Pasig);
+                                    Console.WriteLine("Account Balance: " + change);
+                                    Console.WriteLine("**************************************\n");
+                                    Console.WriteLine("Thank you for riding with PUPNR Train Station.");
+
+
+                                }
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("\nInvalid input, Please input the right keyword. ");
+
+                            }
+
+                        }
+
+                    }
+                }
+                if (beepcard == 2)
+                    Console.WriteLine("*** Thank you for your Explore! ***");
+                return;
+
+            }
+        }
+        static void GetCubao()
+        {
+            //Payment Methods
+            ShowPaymentMthd();
+            int paymentMthds = GetpaymentMthd();
+
+            if (paymentMthds == 1)
+            {
+                //The Fare of the location
+                Console.WriteLine(" \nThe fare of Cubao is " + Cubao);
+                Console.WriteLine("Please enter your payment:\n ");
+                payment = Convert.ToInt32(Console.ReadLine());
+
+                change = payment - Cubao;
+                Console.WriteLine(" \nThe change is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                Console.WriteLine(" \n********** Thank you! ******** ");
+
+                //Option to view destination history
+                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                char choice = Console.ReadKey().KeyChar;
+
+                if (choice == 'Y' || choice == 'y')
+                {
+                    Console.WriteLine("\n**************************************");
+                    Console.WriteLine(" Destination & Transcation History ");
+                    Console.WriteLine("\nDestination: " + location);
+                    Console.WriteLine("Amount Paid: " + payment);
+                    Console.WriteLine("Location Fare: " + Cubao);
+                    Console.WriteLine("Change: " + change);
+                    Console.WriteLine("**************************************\n");
+                }
+
+            }
+            else if (paymentMthds == 2)
+            {
+
+                Console.WriteLine(" \nPress 1 to login to your existing account ");
+                Console.WriteLine("Press 2 to exit\n ");
+                beepcard = Convert.ToInt32(Console.ReadLine());
+
+                if (beepcard == 1)
+                {
+                    //Logging account
+                    GetLoggingAccount();
+
+
+                    while (true)
+                    {
+                        //Checking Balance account
+                        Console.WriteLine(" \nPress 1 to check your current Balance ");
+                        Console.WriteLine("Press 2 to recharge your Balance\n ");
+
+                        balance = Convert.ToInt32(Console.ReadLine());
+                        amount = 50;
+
+
+                        if (balance == 1)
+                        {
+
+                            Console.WriteLine("\n*** Your account balance is " + amount + " *");
+                        }
+                        else if (balance == 2)
+                        {
+                            //Recharge the balance account
+                            Console.WriteLine("\nHow much do you want to recharge? ");
+                            newbal = Convert.ToInt32(Console.ReadLine());
+
+                            Total = amount + newbal;
+                            Console.WriteLine("\n*** The total amount is " + Total + " *");
+
+                            Console.WriteLine(" \nThe fare of Cubao is " + Cubao);
+                            Console.WriteLine("Type Enter to proceed paying...\n ");
+                            enter = Console.ReadLine();
+
+                            if (enter == "Enter")
+                            {
+                                change = Total - Cubao;
+                                Console.WriteLine(" \nYour account balance is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                                Console.WriteLine(" \n********** Thank you! ******** ");
+
+
+                                //Option to view destination history
+                                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                                char choice = Console.ReadKey().KeyChar;
+
+                                if (choice == 'Y' || choice == 'y')
+                                {
+                                    Console.WriteLine("\n**************************************");
+                                    Console.WriteLine(" Destination & Transcation History ");
+                                    Console.WriteLine("\nDestination: " + location);
+                                    Console.WriteLine("Amount Paid: " + Total);
+                                    Console.WriteLine("Location Fare: " + Cubao);
+                                    Console.WriteLine("Account Balance: " + change);
+                                    Console.WriteLine("**************************************\n");
+                                    Console.WriteLine("Thank you for riding with PUPNR Train Station.");
+
+
+                                }
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("\nInvalid input, Please input the right keyword. ");
+
+                            }
+
+                        }
+
+                    }
+                }
+                if (beepcard == 2)
+                    Console.WriteLine("*** Thank you for your Explore! ***");
+                return;
+
+            }
+        }
+        static void GetMakati()
+        {
+            //Payment Methods
+            ShowPaymentMthd();
+            int paymentMthds = GetpaymentMthd();
+
+            if (paymentMthds == 1)
+            {
+                //The Fare of the location
+                Console.WriteLine(" \nThe fare of Makati is " + Makati);
+                Console.WriteLine("Please enter your payment:\n ");
+                payment = Convert.ToInt32(Console.ReadLine());
+
+                change = payment - Pasig;
+                Console.WriteLine(" \nThe change is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                Console.WriteLine(" \n********** Thank you! ******** ");
+
+                //Option to view destination history
+                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                char choice = Console.ReadKey().KeyChar;
+
+                if (choice == 'Y' || choice == 'y')
+                {
+                    Console.WriteLine("\n**************************************");
+                    Console.WriteLine(" Destination & Transcation History ");
+                    Console.WriteLine("\nDestination: " + location);
+                    Console.WriteLine("Amount Paid: " + payment);
+                    Console.WriteLine("Location Fare: " + Makati);
+                    Console.WriteLine("Change: " + change);
+                    Console.WriteLine("**************************************\n");
+                }
+
+            }
+            else if (paymentMthds == 2)
+            {
+
+                Console.WriteLine(" \nPress 1 to login to your existing account ");
+                Console.WriteLine("Press 2 to exit\n ");
+                beepcard = Convert.ToInt32(Console.ReadLine());
+
+                if (beepcard == 1)
+                {
+                    //Logging account
+                    GetLoggingAccount();
+
+
+                    while (true)
+                    {
+                        //Checking Balance account
+                        Console.WriteLine(" \nPress 1 to check your current Balance ");
+                        Console.WriteLine("Press 2 to recharge your Balance\n ");
+
+                        balance = Convert.ToInt32(Console.ReadLine());
+                        amount = 50;
+
+
+                        if (balance == 1)
+                        {
+
+                            Console.WriteLine("\n*** Your account balance is " + amount + " *");
+                        }
+                        else if (balance == 2)
+                        {
+                            //Recharge the balance account
+                            Console.WriteLine("\nHow much do you want to recharge? ");
+                            newbal = Convert.ToInt32(Console.ReadLine());
+
+                            Total = amount + newbal;
+                            Console.WriteLine("\n*** The total amount is " + Total + " *");
+
+                            Console.WriteLine(" \nThe fare of Makati is " + Makati);
+                            Console.WriteLine("Type Enter to proceed paying...\n ");
+                            enter = Console.ReadLine();
+
+                            if (enter == "Enter")
+                            {
+                                change = Total - Makati;
+                                Console.WriteLine(" \nYour account balance is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                                Console.WriteLine(" \n********** Thank you! ******** ");
+
+
+                                //Option to view destination history
+                                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                                char choice = Console.ReadKey().KeyChar;
+
+                                if (choice == 'Y' || choice == 'y')
+                                {
+                                    Console.WriteLine("\n**************************************");
+                                    Console.WriteLine("Destination & Transcation History ");
+                                    Console.WriteLine("\nDestination: " + location);
+                                    Console.WriteLine("Amount Paid: " + Total);
+                                    Console.WriteLine("Location Fare: " + Makati);
+                                    Console.WriteLine("Account Balance: " + change);
+                                    Console.WriteLine("**************************************\n");
+                                    Console.WriteLine("Thank you for riding with PUPNR Train Station.");
+
+
+                                }
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("\nInvalid input, Please input the right keyword. ");
+
+                            }
+
+                        }
+
+                    }
+                }
+                if (beepcard == 2)
+                    Console.WriteLine("*** Thank you for your Explore! ***");
+                return;
+
+            }
+        }
+        static void GetBGC()
+        {
+            //Payment Methods
+            ShowPaymentMthd();
+            int paymentMthds = GetpaymentMthd();
+
+            if (paymentMthds == 1)
+            {
+                //The Fare of the location
+                Console.WriteLine(" \nThe fare of BGC is " + BGC);
+                Console.WriteLine("Please enter your payment:\n ");
+                payment = Convert.ToInt32(Console.ReadLine());
+
+                change = payment - BGC;
+                Console.WriteLine(" \nThe change is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                Console.WriteLine(" \n********** Thank you! ******** ");
+
+                //Option to view destination history
+                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                char choice = Console.ReadKey().KeyChar;
+
+                if (choice == 'Y' || choice == 'y')
+                {
+                    Console.WriteLine("\n**************************************");
+                    Console.WriteLine(" Destination & Transcation History ");
+                    Console.WriteLine("\nDestination: " + location);
+                    Console.WriteLine("Amount Paid: " + payment);
+                    Console.WriteLine("Location Fare: " + BGC);
+                    Console.WriteLine("Change: " + change);
+                    Console.WriteLine("**************************************\n");
+                }
+
+            }
+            else if (paymentMthds == 2)
+            {
+
+                Console.WriteLine(" \nPress 1 to login to your existing account ");
+                Console.WriteLine("Press 2 to exit\n ");
+                beepcard = Convert.ToInt32(Console.ReadLine());
+
+                if (beepcard == 1)
+                {
+                    //Logging account
+                    GetLoggingAccount();
+
+
+                    while (true)
+                    {
+                        //Checking Balance account
+                        Console.WriteLine(" \nPress 1 to check your current Balance ");
+                        Console.WriteLine("Press 2 to recharge your Balance\n ");
+
+                        balance = Convert.ToInt32(Console.ReadLine());
+                        amount = 50;
+
+
+                        if (balance == 1)
+                        {
+
+                            Console.WriteLine("\n*** Your account balance is " + amount + " *");
+                        }
+                        else if (balance == 2)
+                        {
+                            //Recharge the balance account
+                            Console.WriteLine("\nHow much do you want to recharge? ");
+                            newbal = Convert.ToInt32(Console.ReadLine());
+
+                            Total = amount + newbal;
+                            Console.WriteLine("\n*** The total amount is " + Total + " *");
+
+                            Console.WriteLine(" \nThe fare of BGC is " + BGC);
+                            Console.WriteLine("Type Enter to proceed paying...\n ");
+                            enter = Console.ReadLine();
+
+                            if (enter == "Enter")
+                            {
+                                change = Total - BGC;
+                                Console.WriteLine(" \nYour account balance is " + change + " pesos, Welcome aboard  to PUPNR Train Station. ");
+                                Console.WriteLine(" \n********** Thank you! ******** ");
+
+
+                                //Option to view destination history
+                                Console.WriteLine("\nDo you want to view your destination & transcation history? Press Y for yes or any key to exit. ");
+                                char choice = Console.ReadKey().KeyChar;
+
+                                if (choice == 'Y' || choice == 'y')
+                                {
+                                    Console.WriteLine("\n**************************************");
+                                    Console.WriteLine(" Destination & Transcation History ");
+                                    Console.WriteLine("\nDestination: " + location);
+                                    Console.WriteLine("Amount Paid: " + Total);
+                                    Console.WriteLine("Location Fare: " + BGC);
+                                    Console.WriteLine("Account Balance: " + change);
+                                    Console.WriteLine("**************************************\n");
+                                    Console.WriteLine("Thank you for riding with PUPNR Train Station.");
+
+
+                                }
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("\nInvalid input, Please input the right keyword. ");
+
+                            }
+
+                        }
+
+                    }
+                }
+                if (beepcard == 2)
+                    Console.WriteLine("*** Thank you for your Explore! ***");
+                return;
+
+            }
+        }
+
+    }
+}
